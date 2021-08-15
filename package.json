@@ -1,0 +1,31 @@
+{
+  "name": "fatura-backend-newsletter",
+  "version": "1.0.0",
+  "description": "Fatura Hackathon, Backend problem: Newsletter API",
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "tsc-watch --onFirstSuccess \"nodemon dist/server.js\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/theSeifHub/fatura-backend-newsletter.git"
+  },
+  "author": "Seif Eldeen Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/theSeifHub/fatura-backend-newsletter/issues"
+  },
+  "homepage": "https://github.com/theSeifHub/fatura-backend-newsletter#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "body-parser": "^1.19.0",
+    "nodemon": "^2.0.12",
+    "tsc-watch": "^4.4.0",
+    "tslint": "^6.1.3",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
