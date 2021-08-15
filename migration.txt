@@ -1,0 +1,28 @@
+Schema:
+=======
+
+CREATE Table subscriber:
+COLUMN id: int PK autogen
+COLUMN email: str
+COLUMN balance: int
+COLUMN subscription_type: int FK (subscription_type.id)
+COLUMN unsubscribed: bool
+############################
+
+CREATE Table subscription_type:
+COLUMN id: int PK autogen
+COLUMN type: str
+COLUMN price: int
+############################
+
+CREATE Table issue_content:
+COLUMN id: int PK autogen
+COLUMN content: str
+COLUMN subscription_type: str
+############################
+
+CREATE Table subscribers_seen_issues:
+COLUMN id: int PK autogen
+COLUMN subscriber_id: int FK (subscriber.id)
+COLUMN issue_id: int FK (issue_content.id)
+############################
