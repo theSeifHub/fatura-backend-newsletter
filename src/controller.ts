@@ -19,16 +19,15 @@ export const subscribeToNewsletter = (req: Request, res: Response, next: NextFun
   const {
     body: {
       email,
-      subType, // subscription type
+      subType: subscriptionType,
+      method: paymentMethod,
     },
   } = req;
 
-
-  // console.log(">>>  ", Object.keys(req));
-
-  services.makeSubscription(email, subType);
+  const { result } = services.makeSubscription(email, subscriptionType, paymentMethod);
+  console.log("result", result);
   return res.status(201).json({
     code: 201,
-    message: `Success: ${email} is subscribed`,
+    message: result,
   });
 }
