@@ -1,0 +1,29 @@
+ER
+
+SubscriptionType
+---
+ID int PK AUTOINCREMENT IDENTITY
+Type str
+Price int
+
+Subscriber
+---
+ID int PK AUTOINCREMENT IDENTITY
+Email str
+Balance int
+SubscriptionType int FK >- SubscriptionType.ID
+StillSubscribed bool
+
+Issue
+---
+ID int PK AUTOINCREMENT IDENTITY
+Title str
+Body str
+SubscriptionType int FK >- SubscriptionType.ID
+# ReaderSubscriber int FK >-< Subscriber.ID
+
+SeenIssue
+---
+# ID int PK AUTOINCREMENT IDENTITY
+ReaderSubscriber int FK -0< Subscriber.ID
+Issue int FK -0< Issue.ID
