@@ -1,0 +1,23 @@
+{
+  "name": "default",
+  "type": "postgres",
+  "host": "localhost",
+  "port": "5432",
+  "username": "seifme",
+  "password": "taz511",
+  "database": "NewsletterDB",
+  "synchronize": true,
+  "logging": false,
+  "entities": [
+    "dist/entity/*.js"
+  ],
+  "migrations": [
+    "dist/migration/*.js"
+  ],
+  "subscribers": [
+    "src/subscriber/**/*.ts"
+  ],
+  "cli": {
+    "entitiesDir": "src/entity", "migrationsDir": "src/migration"
+  }
+}
