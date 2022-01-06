@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { BaseEntityAttributes } from "./BaseEntityAttributes";
 import { Subscriber } from "./Subscriber";
-import { SubscriptionType } from "./SubscriptionType";
+import { SubscriptionTier } from "./SubscriptionTier";
 
 @Entity({ name: "Issue" })
 export class Issue extends BaseEntityAttributes {
@@ -31,11 +31,11 @@ export class Issue extends BaseEntityAttributes {
   })
   public body!: string;
   
-  @ManyToOne(() => SubscriptionType, subscriptionType => subscriptionType.issues)
+  @ManyToOne(() => SubscriptionTier, subscriptionTier => subscriptionTier.issues)
   @JoinColumn({
-    name: "subscription_type_id"
+    name: "subscription_tier_id"
   })
-  public subscriptionType!: SubscriptionType;
+  public subscriptionTier!: SubscriptionTier;
 
   @ManyToMany(() => Subscriber, subscriber => subscriber.seenIssues)
   public readSubscribers!: Subscriber[];

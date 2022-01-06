@@ -7,7 +7,9 @@
   "password": "taz511",
   "database": "NewsletterDB",
   "synchronize": true,
-  "logging": false,
+  "logging": true,
+  "migrationsRun": true,
+  "migrationsTableName": "db_migrations",
   "entities": [
     "dist/entity/*.js"
   ],

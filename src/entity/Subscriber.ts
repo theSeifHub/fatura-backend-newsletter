@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { BaseEntityAttributes } from "./BaseEntityAttributes";
 import { Issue } from "./Issue";
-import { SubscriptionType } from "./SubscriptionType";
+import { SubscriptionTier } from "./SubscriptionTier";
 
 @Entity({ name: "Subscriber" })
 export class Subscriber extends BaseEntityAttributes {
@@ -22,6 +22,7 @@ export class Subscriber extends BaseEntityAttributes {
   @Column({
     type: "varchar",
     name: "email",
+    unique: true,
   })
   public email!: string;
 
@@ -38,15 +39,15 @@ export class Subscriber extends BaseEntityAttributes {
   })
   public balance!: number;
 
-  @ManyToOne(() => SubscriptionType, subscriptionType => subscriptionType.subscribers)
+  @ManyToOne(() => SubscriptionTier, subscriptionTier => subscriptionTier.subscribers)
   @JoinColumn({
-    name: "subscription_type_id"
+    name: "subscription_tier_id"
   })
-  public subscriptionType!: SubscriptionType;
+  public subscriptionTier!: SubscriptionTier;
 
   @ManyToMany(() => Issue, issue => issue.readSubscribers)
   @JoinTable({
-    name: "seenIssues",
+    name: "SeenIssues",
     joinColumn: {
       name: "subscriber_id",
     },
