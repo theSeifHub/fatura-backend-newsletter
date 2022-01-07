@@ -1,29 +1,30 @@
-import { PaymentMethod, SubscriptionType } from "./model";
+import {
+  PaymentMethod,
+  SubscriptionType,
+} from "./model";
+import * as dbRepo from "./repository";
 
-const doesEmailExist = (email: string) => {
-  // TODO query
-  return false;
-}
-
-const createSubscriptionData = (email: string, subscriptionType: SubscriptionType, balance: number) => {
-  // TODO query
-}
-
-export const addNewSubscription = (email: string, subscriptionType: SubscriptionType) => {
-  if (!doesEmailExist(email)) {
-    let balance = 0;
-    while (balance < 50) {
-      balance = Math.floor(Math.random() * 500);
+const generateBalance = () => {
+  let balance = 0;
+    while (balance < 100) {
+      balance = Math.ceil(Math.random() * 500);
     };
+  return balance;
+}
 
-    createSubscriptionData(email, subscriptionType, balance);
+export const addNewSubscription = async (email: string, subscriptionType: SubscriptionType) => {
+  if (!await dbRepo.hasEmailSubscribedBefore(email)) {
+    const balance = generateBalance();
+    dbRepo.createNewSubscription(email, subscriptionType, balance);
 
     return {
-      result: "Subscription success",
+      result: "Subscribed successfully",
+      isCreated: true,
     };
   } else {
     return {
       result: "Email already subscribed",
+      isCreated: false,
     }
   }
 }

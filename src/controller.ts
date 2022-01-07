@@ -1,6 +1,7 @@
 import {
   Request, Response, NextFunction,
 } from "express";
+import { StatusCodes } from "http-status-codes";
 import { PaymentMethod } from "./model";
 import * as services from "./service";
 
@@ -16,20 +17,21 @@ export const runServer = (req: Request, res: Response, next: NextFunction) => {
   }
 }
 
-export const subscribeToNewsletter = (req: Request, res: Response, next: NextFunction) => {
+export const subscribeToNewsletter = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const {
       body: {
         email,
         subType: subscriptionType,
-        method: paymentMethod,
+        payMethod,
       },
     } = req;
 
-    const { result } = services.addNewSubscription(email, subscriptionType);
+    const { result, isCreated } = await services.addNewSubscription(email, subscriptionType);
 
-    return res.status(201).json({
-      code: 201,
+    return res.status(
+      isCreated ? StatusCodes.CREATED : StatusCodes.CONFLICT,
+    ).json({
       message: result,
     });
   } catch (err) {
